@@ -1,0 +1,22 @@
+{
+  "name": "automating-mac-apps-plugin",
+  "owner": {
+    "name": "Richard Hightower",
+    "email": "rick@spillwave.com"
+  },
+  "metadata": {
+    "description": "Automates macOS apps via Apple Events using AppleScript (discovery) and JXA (production logic)",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "automating-mac-apps",
+      "description": "Automates macOS apps via Apple Events using AppleScript (discovery) and JXA (production logic). Use when asked about AppleScript, JXA, osascript, or macOS app automation.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/automating-mac-apps"
+      ]
+    }
+  ]
+}
