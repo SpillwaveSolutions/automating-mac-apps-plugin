@@ -28,6 +28,7 @@ description: Automates Apple Mail via JXA with AppleScript dictionary discovery.
 - **Integration with `automating-mac-apps`**: Use this skill for Mail-specific automation. Reference `automating-mac-apps` for:
   - Permission setup (System Preferences > Security & Privacy > Automation)
   - Shell command integration (e.g., `osascript` for AppleScript execution)
+- **PyXA Installation:** To use PyXA examples in this skill, see the installation instructions in `automating-mac-apps` skill (PyXA Installation section).
   - UI scripting fallbacks (when Mail dictionary lacks functionality)
 - **Complementary usage**: Load `automating-mac-apps` first for foundation, then this skill for Mail operations.
 

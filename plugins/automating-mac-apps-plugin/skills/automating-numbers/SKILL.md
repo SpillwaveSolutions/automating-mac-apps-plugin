@@ -8,6 +8,7 @@ description: Automates Apple Numbers via JXA with AppleScript dictionary discove
 ## Relationship to the macOS automation skill
 - Standalone for Numbers, aligned with `automating-mac-apps` patterns.
 - Use `automating-mac-apps` for permissions, shell, and UI scripting guidance.
+- **PyXA Installation:** To use PyXA examples in this skill, see the installation instructions in `automating-mac-apps` skill (PyXA Installation section).
 
 ## Core Framing
 - Numbers AppleScript dictionary is AppleScript-first; discover there.

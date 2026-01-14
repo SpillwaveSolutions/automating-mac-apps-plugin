@@ -8,6 +8,7 @@ description: Automates Microsoft Word via JXA with AppleScript dictionary discov
 ## Relationship to the macOS automation skill
 - Standalone for Word, aligned with `automating-mac-apps` patterns.
 - Use `automating-mac-apps` skill for permissions, shell execution, and UI scripting guidance.
+- **PyXA Installation:** To use PyXA examples in this skill, see the installation instructions in `automating-mac-apps` skill (PyXA Installation section).
 
 ## Core framing
 - Word dictionary is AppleScript-first; discover there.

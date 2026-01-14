@@ -15,6 +15,7 @@ description: Automates macOS Calendar via JXA with AppleScript dictionary discov
 ## Relationship to the macOS automation skill
 - Use `automating-mac-apps` for general app permissions, shell commands, UI scripting, and cross-app automation patterns.
 - This skill focuses specifically on Calendar events, calendars, and EventKit bridge functionality.
+- **PyXA Installation:** To use PyXA examples in this skill, see the installation instructions in `automating-mac-apps` skill (PyXA Installation section).
 
 ## Core Framing
 - Calendar dictionary is AppleScript-first; discover there.

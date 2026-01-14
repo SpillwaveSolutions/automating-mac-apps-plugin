@@ -8,6 +8,7 @@ description: Automates Microsoft Excel on macOS via JXA with AppleScript diction
 ## Relationship to the macOS automation skill
 - Standalone for Excel, but aligned with `automating-mac-apps` patterns.
 - Use `automating-mac-apps` for permissions, shell, and UI scripting guidance.
+- **PyXA Installation:** To use PyXA examples in this skill, see the installation instructions in `automating-mac-apps` skill (PyXA Installation section).
 
 ## Core Framing
 - Excel AppleScript dictionary is AppleScript-first; use Script Editor for discovery.

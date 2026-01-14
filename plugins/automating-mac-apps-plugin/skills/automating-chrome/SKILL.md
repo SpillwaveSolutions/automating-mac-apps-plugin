@@ -18,6 +18,8 @@ description: Automates Google Chrome and Chromium-based browsers via JXA with Ap
 - `web-browser-automation`: Complete guide for Chrome, Edge, Brave, and Arc automation
 - `automating-mac-apps`: PyXA fundamentals and macOS integration patterns
 
+**PyXA Installation:** To use PyXA examples, see the installation instructions in `automating-mac-apps` skill (PyXA Installation section).
+
 ## Contents
 - [Scope](#scope)
 - [Core framing](#core-framing)

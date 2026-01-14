@@ -88,12 +88,25 @@ Scripts developed for earlier macOS versions may fail in Sequoia 15 due to:
 - **System Integration**: Notifications, dialogs, clipboard, sound processing
 - **AppleScript Integration**: Can load and execute AppleScript from Python
 
-### Installation
+### PyXA Installation {#pyxa-installation}
+
 ```bash
+# Install PyXA
 pip install mac-pyxa
-# Requires Python 3.10+, PyObjC 9.x compatible
-# Latest version: 0.3.0.1 (April 2023)
+
+# Or with pip3 explicitly
+pip3 install mac-pyxa
+
+# Requirements:
+# - Python 3.10+ (check with: python3 --version)
+# - macOS 12+ (Monterey or later recommended)
+# - PyObjC is installed automatically as a dependency
+
+# Verify installation
+python3 -c "import PyXA; print(f'PyXA {PyXA.__version__} installed successfully')"
 ```
+
+> **Note:** All app-specific skills in this plugin that show PyXA examples assume PyXA is installed. See this section for installation.
 
 ### PyXA Example (Safari Automation)
 ```python

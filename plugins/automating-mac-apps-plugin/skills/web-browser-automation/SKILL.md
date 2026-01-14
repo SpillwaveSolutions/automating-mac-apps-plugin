@@ -28,6 +28,8 @@ description: Comprehensive macOS browser automation using PyXA, Playwright, Sele
 
 This guide covers comprehensive web browser automation on macOS desktop, focusing on automation (not testing). We cover four major automation frameworks with practical examples for real-world scenarios.
 
+**PyXA Installation:** To use PyXA examples in this skill, see the installation instructions in `automating-mac-apps` skill (PyXA Installation section).
+
 ### Primary Automation Tools
 
 - **PyXA**: macOS-native Python wrapper with direct browser integration

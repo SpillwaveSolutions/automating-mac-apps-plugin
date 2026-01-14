@@ -7,6 +7,7 @@ description: Automates Apple Reminders using JavaScript for Automation (JXA), co
 
 ## Relationship to the macOS automation skill
 - Standalone for Reminders; reuse `automating-mac-apps` for permissions, shell helpers, and ObjC debugging patterns.
+- **PyXA Installation:** To use PyXA examples in this skill, see the installation instructions in `automating-mac-apps` skill (PyXA Installation section).
 
 ## Core Framing
 Reminders works like a database: everything is accessed via specifiers (references to objects). Start by exploring the Reminders dictionary in Script Editor (switch to JavaScript view). Read properties with methods like `name()` or `id()`; write with assignments. Use `.whose` for efficient server-side filtering to minimize performance overhead. For creation, use constructors + `.push()` instead of `make` to avoid errors. Note: no native `move` command—use copy-delete instead. Priority: 1 (high), 5 (medium), 9 (low), 0 (none). Recurrence/location scripting is limited; use Shortcuts for advanced features.

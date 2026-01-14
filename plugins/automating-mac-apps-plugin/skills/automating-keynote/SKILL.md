@@ -16,12 +16,14 @@ description: Automates Apple Keynote using JXA with AppleScript dictionary disco
 - This skill focuses on Keynote-specific automation (documents, slides, charts).
 - Use `automating-mac-apps` for cross-app workflows or general macOS scripting foundations.
 - Assumes Apple Events knowledge from the related skill.
+- **PyXA Installation:** To use PyXA examples in this skill, see the installation instructions in `automating-mac-apps` skill (PyXA Installation section).
 
 ## Core Framing
 - JXA (JavaScript for Automation) enables macOS app scripting with JavaScript syntax.
 - AppleScript dictionaries define Keynote's object model—discover via Script Editor.
 - JXA objects are specifiers: read with methods like `.name()`, write with assignments.
 - Production scripts use JXA for reliability; AppleScript for prototyping.
+- **Important:** The JXA `Path()` function is required when specifying file paths to Keynote (e.g., for images, exports, or opening documents). Use `Path("/path/to/file")` instead of plain strings.
 
 ## Workflow (default)
 1) Discover terms in Script Editor > File > Open Dictionary > Keynote.
@@ -52,6 +54,17 @@ if (keynote.documents.length > 0) {
 const doc = keynote.documents[0];
 const slide = doc.slides.push(keynote.Slide({baseSlide: doc.masterSlides['Title - Center']}));
 slide.defaultTitleItem.objectText = "New Slide";
+```
+
+**Add Image to Slide (note Path() usage):**
+```javascript
+const slide = doc.slides[0];
+const img = keynote.Image({
+  file: Path("/Users/you/Desktop/diagram.png"),  // Path() required!
+  position: { x: 100, y: 100 },
+  width: 800
+});
+slide.images.push(img);
 ```
 
 ## What to load

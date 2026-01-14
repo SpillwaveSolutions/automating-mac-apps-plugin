@@ -8,6 +8,7 @@ description: Automates Apple Pages using JXA with AppleScript dictionary discove
 ## Relationship to the macOS automation skill
 - Standalone for Pages, aligned with `automating-mac-apps` patterns.
 - Use `automating-mac-apps` for permissions, shell, and UI scripting guidance.
+- **PyXA Installation:** To use PyXA examples in this skill, see the installation instructions in `automating-mac-apps` skill (PyXA Installation section).
 
 ## Core framing
 - Pages dictionary is AppleScript-first; discover there.

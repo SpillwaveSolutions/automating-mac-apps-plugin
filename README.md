@@ -1,11 +1,53 @@
 # Automating Mac Apps Plugin
 
-Automates macOS apps via Apple Events using AppleScript (discovery), JXA (legacy), and PyXA/Python (preferred). 
+Automates macOS apps via Apple Events using AppleScript (discovery), JXA (legacy), and PyXA/Python (preferred).
 Includes skills for Calendar, Notes, Mail, Keynote, Numbers, Excel, Reminders, Contacts, and more.
-This is a plugin for Claude Code. It is not ready for primte time yet. 
-Only use it if you are a developer and want to help test it.git remote add origin git@github.com:SpillwaveSolutions/automating-mac-apps-plugin.git
-git branch -M main
-git push -u origin main
+
+> **Note**: This is a plugin for Claude Code. It is not ready for prime time yet. Only use it if you are a developer and want to help test it.
+
+## What is this Plugin?
+
+- Automates 16+ Mac applications from Claude Code
+- Uses JavaScript for Automation (JXA) and Python (PyXA)
+- Provides ready-to-use scripts and reference docs
+- Includes commands, agents, and skills
+- Installed from GitHub: SpillwaveSolutions/automating-mac-apps-plugin
+
+### AI-Powered Mac Automation
+
+![Cover - AI-Powered Mac Automation](presentation_images/cover.png)
+
+*Connect your favorite Mac applications to Claude Code through Apple Events automation. Control Calendar, Notes, Mail, Keynote, Numbers, and more with natural language commands.*
+
+### Plugin Architecture
+
+![Architecture - Three-Layer Design](presentation_images/architecture.png)
+
+*The plugin uses a three-layer architecture:*
+- **Skills Layer**: 16 app-specific automation skills with recipes and reference docs
+- **Commands Layer**: Ready-to-use slash commands for common workflows
+- **Agents Layer**: Intelligent agents that combine multiple skills
+
+### 16 Automation Skills
+
+![Skills Overview - All 16 Skills](presentation_images/skills_overview.png)
+
+*Comprehensive coverage across productivity, communication, and development apps:*
+- **Productivity**: Calendar, Reminders, Notes, Contacts
+- **Office**: Numbers, Pages, Keynote, Excel, Word, PowerPoint
+- **Communication**: Mail, Messages
+- **Development**: Chrome, Web Browser Automation
+
+### Automation Workflow
+
+![Workflow - From Request to Execution](presentation_images/workflow.png)
+
+*How automation flows from your request to app control:*
+1. Natural language request to Claude Code
+2. Skill selection based on context
+3. Script generation (JXA or PyXA)
+4. Apple Events execution
+5. App responds and returns results
 
 ## Installation
 

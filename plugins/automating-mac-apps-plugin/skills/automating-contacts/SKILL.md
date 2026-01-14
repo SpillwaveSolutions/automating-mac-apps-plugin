@@ -9,6 +9,7 @@ description: Automates macOS Contacts via JXA with AppleScript dictionary discov
 - **Standalone for Contacts:** Use this skill for Contacts-specific operations (querying, CRUD, groups).
 - **Reuse `automating-mac-apps` for:** TCC permissions setup, shell command helpers, UI scripting fallbacks, and ObjC bridge patterns.
 - **Integration:** Load both skills when combining Contacts automation with broader macOS scripting.
+- **PyXA Installation:** To use PyXA examples in this skill, see the installation instructions in `automating-mac-apps` skill (PyXA Installation section).
 
 ## Core framing
 - Contacts dictionary is AppleScript-first; discover terms there, implement in JXA.

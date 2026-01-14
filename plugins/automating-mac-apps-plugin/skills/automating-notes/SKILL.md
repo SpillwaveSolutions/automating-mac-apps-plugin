@@ -7,6 +7,7 @@ description: Automates Apple Notes via JXA. Covers accounts/folders/notes, HTML 
 
 ## Relationship to the macOS automation skill
 - Standalone for Notes; reuse `automating-mac-apps` for permissions, shell, and Objective-C/UI scripting patterns.
+- **PyXA Installation:** To use PyXA examples in this skill, see the installation instructions in `automating-mac-apps` skill (PyXA Installation section).
 
 ## Core framing
 - Notes uses an AEOM hierarchy: Application → Accounts → Folders → Notes (with nested folders).
