@@ -1,6 +1,10 @@
 ---
 name: automating-notes
-description: Automates Apple Notes via JXA. Covers accounts/folders/notes, HTML bodies, queries, moves, and Objective-C/UI fallbacks for Notes.app automation on macOS.
+description: Automates Apple Notes via JXA. Use when asked to "create notes programmatically", "automate Notes app", "JXA notes scripting", or "organize notes with automation". Covers accounts/folders/notes, HTML bodies, queries, moves, and Objective-C/UI fallbacks for Notes.app automation on macOS.
+allowed-tools:
+  - Bash
+  - Read
+  - Write
 ---
 
 # Automating Apple Notes (JXA-first, AppleScript discovery)
@@ -158,11 +162,26 @@ except Exception as e:
     print(f"Failed to create note: {e}")
 ```
 
+## Validation Checklist
+- [ ] Account access works (iCloud vs On My Mac)
+- [ ] Folder creation and path resolution succeeds
+- [ ] Note creation with valid HTML body completes
+- [ ] Note appears in Notes UI
+- [ ] `.whose` queries return expected results
+- [ ] Error handling covers missing accounts/folders
+
 ## HTML & fallbacks
 - Allowed tags: `<h1>-<h3>`, `<b>`, `<i>`, `<u>`, `<ul>/<ol>/<li>`, `<div>/<p>/<br>`, `<a>`.
 - **Security:** Always sanitize HTML input; avoid `<script>`, `<style>`, or event handlers to prevent XSS in rendered notes.
 - Checklists/attachments: Objective-C/clipboard fallback (Cmd+Shift+L for checklist, paste image via NSPasteboard + System Events).
 - Append helper: replace `</body>` with extra HTML, or append when missing; validate HTML structure post-modification.
+
+## When Not to Use
+- Cross-platform note taking (use Notion API, Obsidian, or Markdown files)
+- iCloud sync operations requiring status feedback (limited API support)
+- Non-macOS platforms
+- Rich formatting beyond supported HTML tags
+- Collaborative editing workflows (no multi-user support)
 
 ## What to load
 - Basics & specifiers: `automating-notes/references/notes-basics.md`

@@ -1,6 +1,10 @@
 ---
 name: automating-reminders
-description: Automates Apple Reminders using JavaScript for Automation (JXA), covering list/reminder management, filtering with 'whose' queries, efficient creation via constructors and push operations, and copy-delete patterns for moving items. Assumes basic JXA knowledge; integrate with macOS automation skills for permissions and debugging.
+description: Automates Apple Reminders using JavaScript for Automation (JXA). Use when asked to "create reminders programmatically", "automate reminder lists", "JXA Reminders scripting", or "manage reminders via automation". Covers list/reminder management, filtering with 'whose' queries, efficient creation via constructors and push operations, and copy-delete patterns for moving items.
+allowed-tools:
+  - Bash
+  - Read
+  - Write
 ---
 
 # Automating Reminders (JXA-first, AppleScript discovery)
@@ -135,11 +139,25 @@ except Exception as error:
 const overdue = list.reminders.whose({dueDate: {_lessThan: new Date()}})();
 ```
 
+## Validation Checklist
+After implementing Reminders automation:
+- [ ] Verify Reminders permissions granted
+- [ ] Test list access: `app.lists().length > 0`
+- [ ] Confirm reminder creation with valid dates
+- [ ] Check reminder appears in Reminders UI
+- [ ] Validate `.whose` queries return expected results
+
 ## Common Pitfalls
 - **Permission errors**: Grant Reminders access in System Preferences > Security & Privacy.
 - **-10024 errors**: Use constructor + push instead of make.
 - **Invalid dates**: Validate before assignment.
 - **Missing lists**: Check existence with `app.lists.byName(name)` before use.
+
+## When Not to Use
+- For cross-platform task management (use Todoist API or similar)
+- When complex recurrence patterns are needed (limited JXA support; use Shortcuts)
+- For non-macOS platforms
+- When location-based reminders require programmatic setup (use Shortcuts)
 
 ## What to Load
 Load progressively as needed:

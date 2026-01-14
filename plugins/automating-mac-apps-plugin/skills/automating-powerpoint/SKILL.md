@@ -1,14 +1,13 @@
 ---
 name: automating-powerpoint
-description: Automates Microsoft PowerPoint via JXA with AppleScript dictionary discovery. Covers presentations, slides, shapes, text, tables, export enums, and interop with Excel.
+description: Automates Microsoft PowerPoint via JXA with AppleScript dictionary discovery. Use when asked to "automate PowerPoint presentations", "create slides programmatically", "JXA PowerPoint scripting", or "export PowerPoint to PDF". Covers presentations, slides, shapes, text, tables, export enums, and interop with Excel.
+allowed-tools:
+  - Bash
+  - Read
+  - Write
 ---
 
 # Automating PowerPoint (JXA-first, AppleScript discovery)
-
-## Setup
-1. Enable Accessibility permissions for PowerPoint in System Preferences > Security & Privacy.
-2. Install required dependencies (none additional for basic JXA).
-3. Test basic connectivity: Open Script Editor and verify PowerPoint dictionary loads.
 
 ## Relationship to the macOS automation skill
 - Standalone for PowerPoint, aligned with `automating-mac-apps` patterns.
@@ -18,11 +17,7 @@ description: Automates Microsoft PowerPoint via JXA with AppleScript dictionary 
 - PowerPoint dictionary is AppleScript-first; discover there.
 - JXA provides logic, data handling, and ObjC bridge access.
 - Objects are specifiers; read via methods, write via assignments.
-
-## Prerequisites
-- Basic JavaScript knowledge for JXA scripting
-- AppleScript familiarity for dictionary exploration
-- PowerPoint installed with Accessibility permissions enabled
+- **Prerequisites:** PowerPoint with Accessibility permissions, basic JXA/AppleScript knowledge.
 
 ## Workflow (default)
 1) Discover dictionary terms in Script Editor (PowerPoint).
@@ -47,11 +42,20 @@ doc.save({in: Path('/Users/username/Desktop/presentation.pptx')});
 - **Export errors:** Verify file paths exist and use absolute paths; check enum values match PowerPoint's export constants.
 - **Interop issues:** Confirm Excel is installed and both applications have proper permissions.
 
+## Validation Checklist
+- [ ] PowerPoint launches and responds to JXA commands
+- [ ] Presentation creation succeeds with expected slides
+- [ ] Shape/text manipulation renders correctly
+- [ ] Export produces valid output files
+- [ ] Enum values match PowerPoint dictionary constants
+- [ ] Error handling covers missing app/permissions
+
 ## When Not to Use
 - Windows PowerPoint automation (use VBA instead)
 - Web-based PowerPoint (use Office 365 APIs)
 - Complex animations or transitions (limited JXA support)
 - Non-macOS platforms
+- Real-time presentation collaboration scenarios
 
 ## What to load
 - PowerPoint JXA basics: `automating-powerpoint/references/powerpoint-basics.md` (core objects, application setup)

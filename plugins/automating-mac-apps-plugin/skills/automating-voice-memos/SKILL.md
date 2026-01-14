@@ -1,6 +1,10 @@
 ---
 name: automating-voice-memos
-description: Automates Apple Voice Memos (Mac Catalyst, no dictionary) via JXA using filesystem/SQLite access and System Events UI scripting.
+description: Automates Apple Voice Memos (Mac Catalyst, no dictionary) via JXA using filesystem/SQLite access and System Events UI scripting. Use when asked to "automate Voice Memos", "export voice recordings", "access Voice Memos database", or "transcribe voice memos".
+allowed-tools:
+  - Bash
+  - Read
+  - Write
 ---
 
 # Automating Voice Memos (no dictionary, data+UI hybrid)
@@ -35,11 +39,25 @@ description: Automates Apple Voice Memos (Mac Catalyst, no dictionary) via JXA u
 - **Full Disk Access**: Only if you read/write the Voice Memos container/DB directly. UI-only exports do not require FDA.
 - **Verify**: For UI-only, confirm you can open the Export menu and interact with the save dialog. For data access, verify `${home}/Library/Group Containers/group.com.apple.VoiceMemos.shared/`.
 
+## Validation Checklist
+After implementing Voice Memos automation:
+- [ ] Verify Accessibility permissions granted for Terminal/Script Editor
+- [ ] Confirm Voice Memos app opens and responds to UI scripting
+- [ ] Test transcript copy script executes without errors
+- [ ] Validate output file contains expected transcript text
+- [ ] For data access: verify Full Disk Access and database path exists
+
 ## Troubleshooting
 - **Permission denied**: Verify Full Disk Access and Accessibility permissions.
 - **Database locked**: Close Voice Memos app before querying.
 - **File not found**: Check macOS version for correct storage path.
 - **UI automation failures**: Ensure Voice Memos is focused and Accessibility is enabled.
+
+## When Not to Use
+- For cross-platform audio recording (use ffmpeg or platform-agnostic tools)
+- When you need programmatic audio capture (use AVFoundation directly)
+- For iOS Voice Memos automation (no API available)
+- When Full Disk Access cannot be granted
 
 ## What to load
 - Start with basics & prerequisites: `automating-voice-memos/references/voice-memos-basics.md` (setup and core concepts).

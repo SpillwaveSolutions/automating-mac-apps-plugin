@@ -1,6 +1,10 @@
 ---
 name: automating-contacts
-description: Automates macOS Contacts via JXA with AppleScript dictionary discovery. Covers querying, CRUD, multi-value fields, groups, images, and ObjC bridge fallbacks. Use for "JXA contacts automation", "macOS address book scripting", "AppleScript contacts", "Contacts app automation".
+description: Automates macOS Contacts via JXA with AppleScript dictionary discovery. Use when asked to "automate contacts", "JXA contacts automation", "macOS address book scripting", "AppleScript contacts", or "Contacts app automation". Covers querying, CRUD, multi-value fields, groups, images, and ObjC bridge fallbacks.
+allowed-tools:
+  - Bash
+  - Read
+  - Write
 ---
 
 # Automating Contacts (JXA-first, AppleScript discovery)
@@ -11,12 +15,12 @@ description: Automates macOS Contacts via JXA with AppleScript dictionary discov
 - **Integration:** Load both skills when combining Contacts automation with broader macOS scripting.
 - **PyXA Installation:** To use PyXA examples in this skill, see the installation instructions in `automating-mac-apps` skill (PyXA Installation section).
 
-## Core framing
-- Contacts dictionary is AppleScript-first; discover terms there, implement in JXA.
-- Everything is an object specifier; read with methods (name(), emails()), write with assignments, and push child objects to collections.
-- Multi-value fields (emails, phones, addresses, dates) are elements, not scalars; use constructor + `.push()`.
-- Group membership uses the `add ... to` command (or `.people.push`), handle duplicates defensively.
-- TCC applies: running host (Terminal/Script Editor/app) must have Contacts permission.
+## Core Framing
+- Contacts dictionary is AppleScript-first; discover there, implement in JXA
+- Object specifiers: read with methods (`name()`, `emails()`), write with assignments
+- Multi-value fields (emails, phones, addresses) are elements; use constructor + `.push()`
+- Group membership: `add ... to` command or `.people.push`; handle duplicates defensively
+- TCC permissions required: running host must have Contacts access
 
 ## Workflow (default)
 1) Inspect the Contacts dictionary in Script Editor (JavaScript view).
@@ -28,15 +32,15 @@ description: Automates macOS Contacts via JXA with AppleScript dictionary discov
 7) For photos or broken bridges, use ObjC/clipboard fallback; for heavy queries, batch read or pre-filter.
 8) Test operations: run→check results→fix errors in iterative loop.
 
-### Complex Operation Checklist
-- [ ] TCC permissions granted for Contacts access
-- [ ] Dictionary inspected and verbs validated
-- [ ] Test AppleScript prototype runs without errors
+### Validation Checklist
+- [ ] Contacts permissions granted (System Settings > Privacy & Security > Contacts)
+- [ ] Dictionary inspected and verbs validated in Script Editor
+- [ ] AppleScript prototype runs without errors
 - [ ] JXA port handles specifiers correctly
 - [ ] Multi-value fields pushed to arrays properly
-- [ ] Groups checked for existence before creation
+- [ ] Groups existence checked before creation
 - [ ] Operations saved and verified with `.id()` checks
-- [ ] Error handling wrapped in try/catch blocks
+- [ ] Error handling wraps all operations
 
 ## Quickstart (upsert + group)
 ```javascript
@@ -70,22 +74,18 @@ try {
 }
 ```
 
-## Pitfalls (read first)
-### TCC Permissions
-- Photos/attachments require TCC + Accessibility permissions; use clipboard UI fallback if blocked.
-
-### Data Limitations  
-- Yearless birthdays: not cleanly scriptable; expect full dates for reliable operations.
-- Geofence or advanced triggers: delegate to Shortcuts app.
-
-### Performance
-- Heavy queries: batch read or pre-filter to avoid timeouts.
+## Pitfalls
+- **TCC Permissions**: Photos/attachments require TCC + Accessibility; use clipboard fallback if blocked
+- **Yearless birthdays**: Not cleanly scriptable; use full dates
+- **Advanced triggers**: Delegate geofencing to Shortcuts app
+- **Heavy queries**: Batch read or pre-filter to avoid timeouts
 
 ## When Not to Use
-- For non-macOS platforms (use platform-specific APIs)
-- When AppleScript-only solutions suffice (skip JXA complexity)
-- For Contacts data that requires iCloud sync operations
-- When building user-facing apps (use native Contacts framework instead)
+- Non-macOS platforms (use platform-specific APIs)
+- Simple AppleScript-only solutions (skip JXA complexity)
+- iCloud sync operations (use native Contacts framework)
+- User-facing apps (use native Contacts framework)
+- Cross-platform contact management (use CardDAV or vCard APIs)
 
 ## What to load
 - JXA basics & specifiers: `automating-contacts/references/contacts-basics.md`

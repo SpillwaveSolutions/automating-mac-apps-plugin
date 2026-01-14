@@ -1,6 +1,10 @@
 ---
 name: automating-calendar
-description: Automates macOS Calendar via JXA with AppleScript dictionary discovery. Covers events, calendars, recurrence, time zones, batch operations, and EventKit ObjC bridge.
+description: Automates macOS Calendar via JXA with AppleScript dictionary discovery. Use when asked to "create calendar events", "automate calendar", "JXA calendar scripting", "EventKit automation", or "PyXA calendar automation". Covers events, calendars, recurrence, time zones, batch operations, and EventKit ObjC bridge.
+allowed-tools:
+  - Bash
+  - Read
+  - Write
 ---
 
 # Automating Calendar (JXA with AppleScript Discovery)
@@ -18,8 +22,10 @@ description: Automates macOS Calendar via JXA with AppleScript dictionary discov
 - **PyXA Installation:** To use PyXA examples in this skill, see the installation instructions in `automating-mac-apps` skill (PyXA Installation section).
 
 ## Core Framing
-- Calendar dictionary is AppleScript-first; discover there.
-- JXA provides logic, data handling, and ObjC/EventKit bridge access.
+- Calendar dictionary is AppleScript-first; discover there
+- JXA provides logic, data handling, and ObjC/EventKit bridge access
+- PyXA offers modern Python alternative with cleaner syntax
+
 **Implementation Notes:** See `automating-calendar/references/calendar-basics.md`
 
 ## Workflow (default)
@@ -35,6 +41,15 @@ description: Automates macOS Calendar via JXA with AppleScript dictionary discov
 - Verify calendar access: `Calendar.calendars.length > 0`
 - Check event creation: `if (!event.id()) throw new Error('Event creation failed')`
 - Log operations for debugging
+
+### Validation Checklist
+- [ ] Calendar permissions granted (System Settings > Privacy & Security > Calendars)
+- [ ] Calendar access confirmed: `Calendar.calendars.length > 0`
+- [ ] Event created with valid start/end dates
+- [ ] Event visible in Calendar UI after save
+- [ ] EventKit bridge queries return expected results
+- [ ] Error handling wraps all operations
+- [ ] Output matches expected event properties
 
 ## Core Examples
 
@@ -130,6 +145,13 @@ events = store.eventsMatchingPredicate_(predicate)
 for event in events:
     print(f"Event: {event.title()}, Start: {event.startDate()}")
 ```
+
+## When Not to Use
+- Cross-platform calendar automation (use Google Calendar API or CalDAV)
+- iCloud sync operations (use EventKit directly)
+- Non-macOS platforms
+- Simple AppleScript-only tasks (skip JXA complexity)
+- Calendar sharing or permissions management (use Calendar UI)
 
 ## What to load
 - Calendar JXA basics: `automating-calendar/references/calendar-basics.md`

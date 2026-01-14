@@ -1,6 +1,10 @@
 ---
 name: automating-pages
-description: Automates Apple Pages using JXA with AppleScript dictionary discovery. Covers documents, templates, text, styles, export, tables, images, and AppleScript bridge fallbacks. Prerequisites: Basic JXA knowledge and macOS automation experience. Target: Developers automating Pages documents via code.
+description: Automates Apple Pages using JXA with AppleScript dictionary discovery. Use when asked to "automate Pages documents", "create documents programmatically", "JXA Pages scripting", or "export Pages to PDF". Covers documents, templates, text, styles, export, tables, images, and AppleScript bridge fallbacks.
+allowed-tools:
+  - Bash
+  - Read
+  - Write
 ---
 
 # Automating Pages (JXA-first, AppleScript discovery)
@@ -32,10 +36,49 @@ doc.body.text = "Hello World";
 4) **Optimize**: Use batch text operations when possible to avoid performance penalties.
 5) **Fallback**: Use AppleScript bridge or UI scripting for dictionary gaps (e.g., specific layout changes).
 
+## Image Insertion (Critical Difference from Keynote)
+
+**IMPORTANT**: Pages does **NOT** support direct image insertion like Keynote does:
+```javascript
+// THIS WORKS IN KEYNOTE:
+Keynote.Image({ file: Path("/path/to/image.png"), position: {x: 100, y: 100} });
+
+// THIS DOES NOT WORK IN PAGES!
+Pages.Image({ file: Path("/path/to/image.png") }); // ❌ Will fail
+```
+
+**Solution**: Use ObjC Pasteboard bridging (see `pages-advanced.md` for details):
+```javascript
+ObjC.import('AppKit');
+const nsImage = $.NSImage.alloc.initWithContentsOfFile("/path/to/image.png");
+const pb = $.NSPasteboard.generalPasteboard;
+pb.clearContents;
+pb.setDataForType(nsImage.TIFFRepresentation, $.NSPasteboardTypeTIFF);
+// Then use System Events to paste (Cmd+V)
+```
+
+**Example Script**: See `automating-pages/scripts/insert_images.js` for a complete working example.
+
 ## Common Pitfalls
+- **Image insertion**: Pages lacks a native `Image` constructor unlike Keynote. Use ObjC Pasteboard method.
 - **Dictionary gaps**: Some features (like sophisticated layout adjustments) aren't in the dictionary. Use the AppleScript bridge or UI scripting.
 - **Permissions**: Ensure 'Accessibility' settings are enabled for UI scripting.
 - **Saving**: Always use `doc.save({in: file_path})` with a valid path object.
+
+## Validation Checklist
+- [ ] Document opens without errors
+- [ ] Text insertion and formatting succeeds
+- [ ] Save operations complete with valid path objects
+- [ ] Template application works if used
+- [ ] Export to target format produces valid output (PDF, Word)
+- [ ] Error handling covers missing files and permissions
+
+## When Not to Use
+- Cross-platform document automation (use python-docx or pandoc)
+- AppleScript alone suffices (skip JXA complexity)
+- Web-based documents (Google Docs API)
+- Non-macOS platforms
+- Complex page layout requiring manual design tools
 
 ## What to load
 ### Level 1: Basics
@@ -51,3 +94,6 @@ doc.body.text = "Hello World";
 - UI scripting patterns: `automating-pages/references/pages-ui-scripting.md` (Fallbacks)
 - Dictionary translation table: `automating-pages/references/pages-dictionary.md` (AppleScript to JXA mapping)
 - PyXA (Python) alternative: `automating-pages/references/pages-pyxa.md`
+
+### Example Scripts
+- Image insertion: `automating-pages/scripts/insert_images.js` (ObjC Pasteboard method for inserting images)

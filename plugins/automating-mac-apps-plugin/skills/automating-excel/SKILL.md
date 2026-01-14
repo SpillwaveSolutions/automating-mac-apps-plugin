@@ -1,6 +1,10 @@
 ---
 name: automating-excel
-description: Automates Microsoft Excel on macOS via JXA with AppleScript dictionary discovery. Focuses on workbooks, worksheets, ranges, 2D arrays, performance toggles, and VBA escape hatches.
+description: Automates Microsoft Excel on macOS via JXA with AppleScript dictionary discovery. Use when asked to "automate Excel spreadsheets", "JXA Excel scripting", "Excel macOS automation", or "bulk Excel data operations". Focuses on workbooks, worksheets, ranges, 2D arrays, performance toggles, and VBA escape hatches.
+allowed-tools:
+  - Bash
+  - Read
+  - Write
 ---
 
 # Automating Excel (JXA-first, AppleScript discovery)

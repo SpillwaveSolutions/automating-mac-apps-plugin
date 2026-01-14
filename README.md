@@ -4,6 +4,9 @@ Automates macOS apps via Apple Events using AppleScript (discovery), JXA (legacy
 Includes skills for Calendar, Notes, Mail, Keynote, Numbers, Excel, Reminders, Contacts, and more.
 
 > **Note**: This is a plugin for Claude Code. It is not ready for prime time yet. Only use it if you are a developer and want to help test it.
+> I have tested it with Reminders, Keynote, Numbers, Notes, Contactc, Calendar, Messenger (send only), and Mail. It is useful as-is but please report any issues or suggestions.
+> Tested Pages and it did not go well. We could only add basic text. We could paste in images but could not predict where they would end up in the doc. 
+> Everything else is woefully short on testing. 
 
 ## What is this Plugin?
 

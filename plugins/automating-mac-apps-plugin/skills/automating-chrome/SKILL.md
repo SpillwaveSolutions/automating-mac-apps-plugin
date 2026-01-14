@@ -1,24 +1,21 @@
 ---
 name: automating-chrome
-description: Automates Google Chrome and Chromium-based browsers via JXA with AppleScript dictionary discovery. Covers windows, tabs, execute(), tunneling patterns, and permissions.
+description: Automates Google Chrome and Chromium-based browsers via JXA with AppleScript dictionary discovery. Use when asked to "automate Chrome tabs", "control browser with JXA", "Chrome AppleScript automation", "Chromium browser scripting", or "browser tab management". Covers windows, tabs, execute(), tunneling patterns, and permissions.
+allowed-tools:
+  - Bash
+  - Read
+  - Write
 ---
 
 # Automating Chrome / Chromium Browsers (JXA-first, AppleScript discovery)
 
-## ⚠️ Deprecation Warning
+## Technology Status
 
-**Important**: The JXA/AppleScript approach documented here uses legacy automation methods. JavaScript injection via AppleScript is disabled by default in modern Chrome versions and may not work reliably.
+JXA/AppleScript browser automation is legacy. JavaScript injection is disabled by default in modern Chrome. Modern alternatives: Selenium/ChromeDriver, Puppeteer, PyXA.
 
-**Recommended Modern Alternatives**:
-- **Web Browser Automation Skill**: Comprehensive guide for Chrome/Chromium automation (see `web-browser-automation` skill)
-- **ChromeDriver**: Official Selenium WebDriver implementation for Chrome
-- **Puppeteer**: Node.js library for headless Chrome automation
+**Related Skills**: `web-browser-automation`, `automating-mac-apps`
 
-**Related Skills**:
-- `web-browser-automation`: Complete guide for Chrome, Edge, Brave, and Arc automation
-- `automating-mac-apps`: PyXA fundamentals and macOS integration patterns
-
-**PyXA Installation:** To use PyXA examples, see the installation instructions in `automating-mac-apps` skill (PyXA Installation section).
+**PyXA Installation:** See `automating-mac-apps` skill (PyXA Installation section).
 
 ## Contents
 - [Scope](#scope)
@@ -254,38 +251,26 @@ ws.send(JSON.stringify({
 }));
 ```
 
-### Puppeteer (Recommended for Node.js)
-```javascript
-const puppeteer = require('puppeteer');
-
-(async () => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.goto('https://example.com');
-  const title = await page.title();
-  console.log(title);
-  await browser.close();
-})();
-```
-
-### Chrome DevTools Protocol (Advanced)
-```javascript
-// WebSocket connection to CDP
-const WebSocket = require('ws');
-const ws = new WebSocket('ws://localhost:9222/devtools/page/{page-id}');
-
-// Send CDP commands
-ws.send(JSON.stringify({
-  id: 1,
-  method: 'Runtime.evaluate',
-  params: { expression: 'document.title' }
-}));
-```
-
 **Setup Requirements**:
 - ChromeDriver: Download from [Chrome for Testing](https://googlechromelabs.github.io/chrome-for-testing/)
 - Puppeteer: `npm install puppeteer`
 - CDP: Launch Chrome with `--remote-debugging-port=9222`
+
+## Validation Checklist
+- [ ] Browser automation permissions granted (System Settings > Privacy & Security)
+- [ ] Chrome running and accessible: `chrome.running()` returns true
+- [ ] JavaScript injection enabled (View > Developer > Allow JavaScript from Apple Events)
+- [ ] Tab/window indices verified before access
+- [ ] Error handling wraps all operations
+- [ ] Data extraction via tunneling confirmed
+- [ ] Results logged and validated
+
+## When Not to Use
+- Cross-platform browser automation (use Selenium or Playwright)
+- Production web scraping or testing (use ChromeDriver/Puppeteer)
+- JavaScript injection disabled (default in modern Chrome)
+- Non-macOS platforms
+- Heavy DOM manipulation (use Puppeteer/Playwright)
 
 ## What to load
 - Chrome JXA basics: `automating-chrome/references/chrome-basics.md`

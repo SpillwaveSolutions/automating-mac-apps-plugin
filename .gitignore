@@ -20,6 +20,8 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
+.idea/
+.claude
 
 # Virtual Environments
 .venv/

@@ -1,6 +1,10 @@
 ---
 name: web-browser-automation
-description: Comprehensive macOS browser automation using PyXA, Playwright, Selenium, and Puppeteer for desktop web testing, scraping, and workflow automation. Use when automating Chrome, Edge, Brave, Arc browsers, building cross-browser testing suites, web scraping, or browser workflow automation.
+description: Comprehensive macOS browser automation using PyXA, Playwright, Selenium, and Puppeteer for desktop web testing, scraping, and workflow automation. Use when asked to "automate web browsers", "Selenium Chrome automation", "Playwright testing", "Puppeteer scraping", or "cross-browser automation". Supports Chrome, Edge, Brave, Arc browsers.
+allowed-tools:
+  - Bash
+  - Read
+  - Write
 ---
 
 # macOS Web Browser Automation Guide
@@ -140,8 +144,7 @@ await page.screenshot({ path: 'capture.png', fullPage: true });
 await page.pdf({ path: 'page.pdf', format: 'A4' });
 ```
 
-### Basic Playwright Usage
-
+### Playwright Quickstart
 ```python
 from playwright.sync_api import sync_playwright
 
@@ -149,46 +152,12 @@ with sync_playwright() as p:
     browser = p.chromium.launch()
     page = browser.new_page()
     page.goto("https://example.com")
-    title = page.title()
-    print(f"Page title: {title}")
-    browser.close()
-```
-
-### Advanced Playwright Features
-
-```python
-from playwright.sync_api import sync_playwright
-
-with sync_playwright() as p:
-    # Launch with options
-    browser = p.chromium.launch(
-        headless=False,
-        args=["--disable-blink-features=AutomationControlled"]
-    )
-
-    context = browser.new_context(
-        viewport={"width": 1280, "height": 720},
-        user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
-    )
-
-    page = context.new_page()
-
-    # Auto-waiting interactions
-    page.goto("https://example.com")
     page.click("text=Get Started")  # Auto-waits for element
     page.fill("#search-input", "automation")
-    page.press("#search-input", "Enter")
-
-    # Handle dynamic content
-    page.wait_for_selector(".results")
-    results = page.query_selector_all(".result-item")
-
-    for result in results:
-        title = result.query_selector("h3").text_content()
-        print(f"Result: {title}")
-
     browser.close()
 ```
+
+For advanced Playwright features (contexts, viewports, dynamic content), see `references/playwright-automation.md`.
 
 ## Additional Resources
 
@@ -197,6 +166,15 @@ with sync_playwright() as p:
 - **Parallel Browser Automation**: `references/selenium-webdriver.md#parallel-testing`
 - **Performance Monitoring**: `references/puppeteer-automation.md#performance-monitoring`
 - **Browser Context Management**: `references/selenium-webdriver.md#browser-contexts-and-pages`
+
+### Validation Checklist
+After implementing browser automation:
+- [ ] Verify browser launches without errors
+- [ ] Confirm page navigation completes successfully
+- [ ] Test element selectors locate expected elements
+- [ ] Validate extracted data matches page content
+- [ ] Check screenshots/PDFs are generated correctly
+- [ ] For PyXA: verify macOS permissions are granted
 
 ### Troubleshooting
 - **Element Not Found Errors**: Common solutions across frameworks
@@ -216,28 +194,15 @@ with sync_playwright() as p:
 - **Parallel Execution**: Running tests concurrently
 - **Resource Pooling**: Managing browser instances efficiently
 
-## Integration Examples
+## When Not to Use
+- For mobile browser automation (use Appium or native testing frameworks)
+- For Windows/Linux-only environments (some PyXA features are macOS-only)
+- When CAPTCHA solving is required (use specialized services)
+- For production scraping without respecting robots.txt
 
-### Database Integration
-Store scraped data in SQLite or other databases for later analysis.
-
-### API Integration
-Submit automation results to REST APIs for reporting and monitoring.
-
-### File System Integration
-Organize screenshots and reports by date, domain, and test type.
-
----
-
-## Complete Reference Guides
-
-For comprehensive documentation on each framework:
-
+## What to Load
 - **PyXA**: `references/pyxa-integration.md` - macOS-native browser control
 - **Playwright**: `references/playwright-automation.md` - Cross-browser testing
 - **Selenium**: `references/selenium-webdriver.md` - Enterprise automation
 - **Puppeteer**: `references/puppeteer-automation.md` - Node.js Chrome automation
-
-**Workflow Examples**: `references/workflows.md` - Complete automation scenarios
-
-This guide provides a high-level overview with links to detailed framework documentation for specific implementation needs.
+- **Workflows**: `references/workflows.md` - Complete automation scenarios

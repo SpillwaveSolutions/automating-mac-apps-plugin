@@ -1,6 +1,10 @@
 ---
 name: automating-word
-description: Automates Microsoft Word via JXA with AppleScript dictionary discovery. Covers documents, ranges, find/replace, tables, export, and ObjC bridge patterns.
+description: Automates Microsoft Word via JXA with AppleScript dictionary discovery. Use when asked to "automate Word documents", "find and replace in Word", "JXA Word scripting", or "create Word documents programmatically". Covers documents, ranges, find/replace, tables, export, and ObjC bridge patterns.
+allowed-tools:
+  - Bash
+  - Read
+  - Write
 ---
 
 # Automating Word (JXA-first, AppleScript discovery)
@@ -25,116 +29,49 @@ description: Automates Microsoft Word via JXA with AppleScript dictionary discov
 
 ## Quick Examples
 
-**Basic document opening (JXA - Legacy):**
+**Document opening:**
 ```javascript
+// JXA
 const word = Application('Microsoft Word');
 word.documents.open('/path/to/document.docx');
 ```
-
-**Basic document opening (PyXA - Recommended):**
 ```python
+# PyXA (Recommended)
 import PyXA
-
 word = PyXA.Word()
 word.documents().open("/path/to/document.docx")
 ```
 
-**PyObjC with Scripting Bridge:**
-```python
-from ScriptingBridge import SBApplication
-
-word = SBApplication.applicationWithBundleIdentifier_("com.microsoft.Word")
-
-# Open document
-document = word.documents().open_("/path/to/document.docx")
-```
-
-**Find and replace (JXA - Legacy):**
+**Find and replace:**
 ```javascript
+// JXA
 const range = word.activeDocument.content;
 range.find.text = 'old text';
 range.find.replacement.text = 'new text';
 range.find.execute({replace: 'all'});
 ```
-
-**Find and replace (PyXA - Recommended):**
 ```python
-import PyXA
-
-word = PyXA.Word()
+# PyXA
 doc = word.active_document()
-
-# Get document content range
-content_range = doc.content()
-
-# Set up find and replace
-find_obj = content_range.find()
+find_obj = doc.content().find()
 find_obj.text = 'old text'
 find_obj.replacement.text = 'new text'
-
-# Execute replacement
 find_obj.execute(replace='all')
 ```
 
-**PyObjC Find and Replace:**
-```python
-from ScriptingBridge import SBApplication
-
-word = SBApplication.applicationWithBundleIdentifier_("com.microsoft.Word")
-
-# Get active document
-doc = word.activeDocument()
-
-# Get content range
-content_range = doc.content()
-
-# Set up find
-find_obj = content_range.find()
-find_obj.setText_('old text')
-find_obj.replacement().setText_('new text')
-
-# Execute replacement
-find_obj.executeWithFindText_replacement_replace_(None, None, 'all')
-```
-
-**Table creation (JXA - Legacy):**
+**Table creation:**
 ```javascript
+// JXA
 const table = word.activeDocument.tables.add(word.activeDocument.content, 3, 4);
 table.cell(1, 1).range.text = 'Header';
 ```
-
-**Table creation (PyXA - Recommended):**
 ```python
-import PyXA
-
-word = PyXA.Word()
-doc = word.active_document()
-
-# Add table with 3 rows, 4 columns
+# PyXA
 table = doc.tables().add(doc.content(), 3, 4)
-
-# Set header in first cell
-cell = table.cell(1, 1)
-cell.range().text = 'Header'
+table.cell(1, 1).range().text = 'Header'
 ```
 
-**PyObjC Table Creation:**
-```python
-from ScriptingBridge import SBApplication
-
-word = SBApplication.applicationWithBundleIdentifier_("com.microsoft.Word")
-
-# Get active document
-doc = word.activeDocument()
-
-# Add table
-content = doc.content()
-table = doc.tables().add_range_numRows_numColumns_(content, 3, 4)
-
-# Set header text
-cell = table.cell_row_column_(1, 1)
-cell.range().setText_('Header')
-```
+For PyObjC Scripting Bridge examples, see `automating-word/references/word-pyxa.md`.
 
 ## Validation Checklist
 After implementing Word automation:
@@ -145,11 +82,10 @@ After implementing Word automation:
 - [ ] Export documents and validate output formats
 
 ## When Not to Use
-Avoid this skill for:
-- General macOS automation (use `automating-mac-apps`)
-- Excel automation (use `automating-excel`)
-- Non-Microsoft Office applications
-- Web-based document processing
+- For general macOS automation (use `automating-mac-apps`)
+- For Excel automation (use `automating-excel`)
+- For non-Microsoft Office applications
+- For web-based document processing (use web APIs or Playwright)
 
 ## What to load
 - Word JXA basics: `automating-word/references/word-basics.md` (core concepts only; see references for advanced usage)

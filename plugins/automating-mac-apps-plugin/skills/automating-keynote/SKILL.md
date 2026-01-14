@@ -1,6 +1,10 @@
 ---
 name: automating-keynote
-description: Automates Apple Keynote using JXA with AppleScript dictionary discovery. Covers document lifecycle, slides, text, shapes, images, tables, charts, transitions, and UI scripting fallback.
+description: Automates Apple Keynote using JXA with AppleScript dictionary discovery. Use when asked to "create Keynote presentations", "automate slide decks", "JXA Keynote scripting", or "generate presentations programmatically". Covers document lifecycle, slides, text, shapes, images, tables, charts, transitions, and UI scripting fallback.
+allowed-tools:
+  - Bash
+  - Read
+  - Write
 ---
 
 # Automating Keynote (JXA-first, AppleScript discovery)
@@ -66,6 +70,20 @@ const img = keynote.Image({
 });
 slide.images.push(img);
 ```
+
+## Validation Checklist
+After implementing Keynote automation:
+- [ ] Verify Keynote is running and accessible
+- [ ] Test slide creation with master slide assignment
+- [ ] Confirm image paths use `Path()` function
+- [ ] Check text rendering in default text items
+- [ ] Validate export operations complete without errors
+
+## When Not to Use
+- For cross-platform presentation automation (use PowerPoint with Python libraries)
+- When AppleScript alone suffices (skip JXA complexity)
+- For web-based presentations (Google Slides, reveal.js)
+- For non-macOS platforms
 
 ## What to load
 - Keynote JXA basics + runtime caveats: `automating-keynote/references/keynote-basics.md`

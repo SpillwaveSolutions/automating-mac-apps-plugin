@@ -1,28 +1,27 @@
 ---
 name: automating-mac-apps
-description: Automates macOS apps via Apple Events using AppleScript (discovery) and JXA (production logic). Use when asked about AppleScript, JXA, osascript, or macOS app automation.
+description: Automates macOS apps via Apple Events using AppleScript (discovery), JXA (legacy), and PyXA (modern Python). Use when asked to "automate Mac apps", "write AppleScript", "JXA scripting", "osascript automation", or "PyXA Python automation". Foundation skill for all macOS app automation.
+allowed-tools:
+  - Bash
+  - Read
+  - Write
 ---
 
 # Automating macOS Apps (Apple Events, AppleScript, JXA)
 
-## ⚠️ Legacy Technology Notice
+## Technology Status
 
-**Important**: JXA (JavaScript for Automation) and AppleScript are legacy automation technologies. They received their last major updates in 2015-2016 and are not actively maintained by Apple. While still functional, they may have compatibility issues with modern macOS versions, especially macOS Sequoia 15+.
+JXA and AppleScript are legacy (last major updates: 2015-2016). Modern alternatives:
+- **PyXA**: Active Python automation (see installation below)
+- **Shortcuts App**: Visual workflow builder
+- **Swift/Objective-C**: Production-ready automation
 
-**Recommended Modern Alternatives**:
-- **Shortcuts App**: Apple's primary automation tool with visual workflow builder
-- **Swift/Objective-C**: For high-performance, production-ready automation
-- **Third-party tools**: Depending on use case (Puppeteer for web, native APIs for specific apps)
+## macOS Sequoia 15 Notes
 
-## macOS Sequoia 15 Compatibility Notes
-
-Scripts developed for earlier macOS versions may fail in Sequoia 15 due to:
-- Stricter TCC (Transparency, Consent, and Control) permissions
-- Enhanced security restrictions on Apple Events
-- Changes to AppleScript execution timeouts
-- Sandboxing improvements affecting script persistence
-
-**Testing Recommendation**: Always test automation scripts on target macOS versions before deployment.
+Test scripts on target macOS due to:
+- Stricter TCC permissions
+- Enhanced Apple Events security
+- Sandbox improvements
 
 ## Core framing (use this mental model)
 - **Apple Events**: The underlying inter-process communication (IPC) transport for macOS automation.
@@ -56,12 +55,14 @@ Scripts developed for earlier macOS versions may fail in Sequoia 15 due to:
    - *Example UI Script*: `tell application "System Events" to click button 1 of window 1 of process "App"`
    - *Example JXA*: `Application('System Events').processes.byName('App').windows[0].buttons[0].click()`
 
-## Reliability checklist (Prioritized)
-1. **Permissions**: Verify Automation/Accessibility permissions (System Settings > Privacy & Security).
-2. **State Check**: Ensure app is running (`Application("App").running()`).
-3. **Idempotency**: Check state before acting (e.g., does folder exist?).
-4. **Dictionary First**: Prefer direct object model over UI scripting.
-5. **Waits**: Add delays/retries around UI operations.
+## Validation Checklist
+- [ ] Automation/Accessibility permissions granted (System Settings > Privacy & Security)
+- [ ] App is running: `Application("App").running()` returns true
+- [ ] State checked before acting (e.g., folder exists)
+- [ ] Dictionary method used (not UI scripting)
+- [ ] Delays/retries added for UI operations
+- [ ] Read-only test command succeeds
+- [ ] Output matches expected values
 
 ## Automation permission warm-up
 - Use before first automation run or after macOS updates to surface prompts:
@@ -73,20 +74,13 @@ Scripts developed for earlier macOS versions may fail in Sequoia 15 due to:
 
 ## Modern Python Alternatives to JXA
 
-**PyXA (Python for macOS Automation)** - **Strongly Recommended** over JXA for new projects:
+**PyXA (Python for macOS Automation)** - Preferred for new projects:
 
-### Why PyXA Is Preferred
-- **Active Development**: Regularly maintained with updates (latest v0.2.3 as of 2026)
-- **Modern Python Syntax**: Clean, readable code with standard Python conventions
-- **Rich Feature Set**: Beyond JXA capabilities - UI scripting, clipboard, notifications, speech recognition
-- **Better Documentation**: Extensive examples, tutorials, active Discord community
-- **Command Chaining**: Intuitive method chaining like `app.lists().reminders().title()`
-
-### PyXA Capabilities
-- **App Automation**: Safari, Calendar, Reminders, Mail, Music, and more
-- **UI Scripting**: Access to non-scriptable apps via UI elements
-- **System Integration**: Notifications, dialogs, clipboard, sound processing
-- **AppleScript Integration**: Can load and execute AppleScript from Python
+### PyXA Features
+- Active development (v0.2.3+), modern Python syntax
+- App automation: Safari, Calendar, Reminders, Mail, Music
+- UI scripting, clipboard, notifications, AppleScript integration
+- Method chaining: `app.lists().reminders().title()`
 
 ### PyXA Installation {#pyxa-installation}
 
@@ -196,20 +190,15 @@ print(f"Unread messages: {unread_count}")
 
 ---
 
-### JXA Status and Migration
-**JXA (JavaScript for Automation)** is **effectively abandoned**:
-- No updates since 2016
-- Fragile and inconsistent behavior
-- Poor error handling and debugging
-- Limited community support
+### JXA Status
+JXA has no updates since 2016. Use PyXA for new projects when possible.
 
-**Migration Recommendation**: Use PyXA for most automation needs. It's more reliable, better documented, and actively maintained.
-
-## When not to use this skill
-- Cross-platform automation (use Selenium/Playwright for web, Python for generic tasks).
-- Full UI testing (use XCUITest or Appium).
-- Environments that strictly block Automation or Accessibility permissions.
-- **New projects**: Consider PyXA or PyObjC instead of JXA.
+## When Not to Use
+- Cross-platform automation (use Selenium/Playwright for web)
+- Full UI testing (use XCUITest or Appium)
+- Environments blocking Automation/Accessibility permissions
+- Non-macOS platforms
+- Simple shell scripting tasks (use Bash directly)
 
 ## Related Skills
 - App-specific automation (create `automating-[app]` skills as needed)

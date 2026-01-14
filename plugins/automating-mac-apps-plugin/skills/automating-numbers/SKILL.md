@@ -1,6 +1,10 @@
 ---
 name: automating-numbers
-description: Automates Apple Numbers via JXA with AppleScript dictionary discovery. Focuses on sheets, tables, ranges, batch I/O, clipboard shim, and high-performance data workflows.
+description: Automates Apple Numbers via JXA with AppleScript dictionary discovery. Use when asked to "automate Numbers spreadsheets", "create spreadsheets programmatically", "JXA Numbers scripting", or "bulk data operations in Numbers". Focuses on sheets, tables, ranges, batch I/O, clipboard shim, and high-performance data workflows.
+allowed-tools:
+  - Bash
+  - Read
+  - Write
 ---
 
 # Automating Numbers (JXA-first, AppleScript discovery)
@@ -23,11 +27,13 @@ description: Automates Apple Numbers via JXA with AppleScript dictionary discove
 4) [ ] Prefer batch reads and clipboard shim for writes.
 5) [ ] Use UI scripting only for dictionary gaps.
 
-## Validation Steps
-- Test with empty documents to verify error handling
-- Verify data integrity after batch operations
-- Check Numbers UI responsiveness after automation runs
-- Log errors with specific Numbers object paths for debugging
+## Validation Checklist
+- [ ] Empty document handling works without errors
+- [ ] Data integrity verified after batch operations
+- [ ] Numbers UI remains responsive after automation runs
+- [ ] Errors logged with specific Numbers object paths
+- [ ] Sheet/table indices validated before access
+- [ ] Clipboard shim restores original clipboard contents
 
 ## Examples
 
@@ -177,10 +183,11 @@ for i, row_data in enumerate(data):
 ```
 
 ## When Not to Use
-- For general macOS automation without Numbers involvement
-- When AppleScript alone suffices (no JXA logic needed)
-- For Numbers tasks requiring complex UI interactions (use `automating-mac-apps` for that)
-- When cross-platform compatibility is required
+- General macOS automation without Numbers involvement
+- AppleScript alone suffices (no JXA logic needed)
+- Complex UI interactions beyond data operations (use `automating-mac-apps`)
+- Cross-platform compatibility required (use CSV/pandas)
+- Real-time collaborative editing scenarios
 
 ## What to load
 - JXA Numbers basics: `automating-numbers/references/numbers-basics.md`
