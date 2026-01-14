@@ -1,0 +1,8 @@
+{
+  "name": "automating-mac-apps",
+  "description": "Automates macOS apps via Apple Events using AppleScript (discovery) and JXA (production logic). Use when asked about AppleScript, JXA, osascript, or macOS app automation.",
+  "author": {
+    "name": "Rick Hightower",
+    "email": "rick@spillwave.com"
+  }
+}
