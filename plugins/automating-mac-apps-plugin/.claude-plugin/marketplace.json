@@ -15,7 +15,45 @@
       "source": "./",
       "strict": false,
       "skills": [
-        "./skills/automating-mac-apps"
+        "./skills/automating-mac-apps",
+        "./skills/automating-keynote",
+        "./skills/automating-excel",
+        "./skills/automating-pages",
+        "./skills/automating-numbers",
+        "./skills/automating-chrome",
+        "./skills/automating-word",
+        "./skills/automating-powerpoint",
+        "./skills/automating-mail",
+        "./skills/automating-calendar",
+        "./skills/automating-contacts",
+        "./skills/automating-voice-memos",
+        "./skills/automating-reminders",
+        "./skills/automating-notes",
+        "./skills/automating-messages",
+        "./skills/web-browser-automation"
+      ],
+      "commands": [
+        "./commands/csv-to-numbers.md",
+        "./commands/csv-to-excel.md",
+        "./commands/excel-to-numbers.md",
+        "./commands/numbers-to-excel.md",
+        "./commands/sheet-report.md",
+        "./commands/doc-to-deck.md",
+        "./commands/contact-upsert.md",
+        "./commands/meeting-setup.md",
+        "./commands/meeting-start.md",
+        "./commands/meeting-end.md"
+      ],
+      "agents": [
+        "./agents/csv-to-numbers-agent.md",
+        "./agents/csv-to-excel-agent.md",
+        "./agents/sheet-convert-agent.md",
+        "./agents/sheet-report-agent.md",
+        "./agents/doc-to-deck-agent.md",
+        "./agents/contact-upsert-agent.md",
+        "./agents/meeting-setup-agent.md",
+        "./agents/meeting-start-agent.md",
+        "./agents/meeting-end-agent.md"
       ]
     }
   ]

@@ -1,0 +1,133 @@
+---
+name: automating-reminders
+description: Automates Apple Reminders using JavaScript for Automation (JXA), covering list/reminder management, filtering with 'whose' queries, efficient creation via constructors and push operations, and copy-delete patterns for moving items. Assumes basic JXA knowledge; integrate with macOS automation skills for permissions and debugging.
+---
+
+# Automating Reminders (JXA-first, AppleScript discovery)
+
+## Relationship to the macOS automation skill
+- Standalone for Reminders; reuse `automating-mac-apps` for permissions, shell helpers, and ObjC debugging patterns.
+
+## Core Framing
+Reminders works like a database: everything is accessed via specifiers (references to objects). Start by exploring the Reminders dictionary in Script Editor (switch to JavaScript view). Read properties with methods like `name()` or `id()`; write with assignments. Use `.whose` for efficient server-side filtering to minimize performance overhead. For creation, use constructors + `.push()` instead of `make` to avoid errors. Note: no native `move` command—use copy-delete instead. Priority: 1 (high), 5 (medium), 9 (low), 0 (none). Recurrence/location scripting is limited; use Shortcuts for advanced features.
+
+## Quickstart (create + alerts)
+First, ensure Reminders permissions are granted (see `automating-mac-apps` for setup).
+
+**JXA (Legacy):**
+```javascript
+try {
+  const app = Application("Reminders");
+  const list = app.lists.byName("Inbox");
+  const r = app.Reminder({
+    name: "Prepare deck",
+    body: "Client review",
+    dueDate: new Date(Date.now() + 3*86400*1000), // 3 days from now
+    remindMeDate: new Date(Date.now() + 2*86400*1000), // Reminder 1 day before due
+    priority: 1 // High priority
+  });
+  list.reminders.push(r);
+  console.log("Reminder created successfully");
+} catch (error) {
+  console.error("Failed to create reminder: " + error.message);
+  // Common errors: Permissions denied, Inbox list not found
+}
+```
+
+**PyXA (Recommended Modern Approach):**
+```python
+import PyXA
+from datetime import datetime, timedelta
+
+try:
+    reminders = PyXA.Reminders()
+
+    # Get Inbox list
+    inbox = reminders.lists().by_name("Inbox")
+
+    # Create reminder with due date and reminder alert
+    reminder = inbox.reminders().push({
+        "name": "Prepare deck",
+        "body": "Client review",
+        "due_date": datetime.now() + timedelta(days=3),
+        "remind_me_date": datetime.now() + timedelta(days=2),
+        "priority": 1  # High priority
+    })
+
+    print("Reminder created successfully")
+
+except Exception as error:
+    print(f"Failed to create reminder: {error}")
+    # Common errors: Permissions denied, Inbox list not found
+```
+
+**PyObjC with Scripting Bridge:**
+```python
+from ScriptingBridge import SBApplication
+from Foundation import NSDate
+
+try:
+    reminders = SBApplication.applicationWithBundleIdentifier_("com.apple.Reminders")
+
+    # Get Inbox list
+    lists = reminders.lists()
+    inbox = None
+    for lst in lists:
+        if lst.name() == "Inbox":
+            inbox = lst
+            break
+
+    if inbox:
+        # Create reminder
+        reminder = reminders.classForScriptingClass_("reminder").alloc().init()
+        reminder.setName_("Prepare deck")
+        reminder.setBody_("Client review")
+
+        # Set due date (3 days from now)
+        due_date = NSDate.dateWithTimeIntervalSinceNow_(3 * 24 * 60 * 60)
+        reminder.setDueDate_(due_date)
+
+        # Set reminder date (2 days from now)
+        remind_date = NSDate.dateWithTimeIntervalSinceNow_(2 * 24 * 60 * 60)
+        reminder.setRemindMeDate_(remind_date)
+
+        reminder.setPriority_(1)  # High priority
+
+        # Add to inbox
+        inbox.reminders().addObject_(reminder)
+
+        print("Reminder created successfully")
+    else:
+        print("Inbox list not found")
+
+except Exception as error:
+    print(f"Failed to create reminder: {error}")
+```
+
+## Workflow (default)
+1) **Discover**: Open Script Editor, view Reminders dictionary in JavaScript mode to learn available properties.
+2) **Target List**: Get your list by name (e.g., `app.lists.byName('Work')`) or ID.
+3) **Filter**: Use `.whose` for queries (e.g., `reminders.whose({name: {_contains: 'meeting'}})`). For dates, use `_lessThan`/`_greaterThan`.
+4) **Create**: Build with `Reminder({...})` then add via `.push()` to avoid errors.
+5) **Batch Operations**: Collect IDs before changes, update/delete in batches.
+6) **Move**: Copy item to new list, then delete original (no native move).
+7) **Advanced Features**: For recurrence/location, call Shortcuts or clone template item.
+
+**Example: Filter overdue reminders:**
+```javascript
+const overdue = list.reminders.whose({dueDate: {_lessThan: new Date()}})();
+```
+
+## Common Pitfalls
+- **Permission errors**: Grant Reminders access in System Preferences > Security & Privacy.
+- **-10024 errors**: Use constructor + push instead of make.
+- **Invalid dates**: Validate before assignment.
+- **Missing lists**: Check existence with `app.lists.byName(name)` before use.
+
+## What to Load
+Load progressively as needed:
+- **Basics**: Start with `automating-reminders/references/reminders-basics.md` for specifiers and simple operations.
+- **Recipes**: Add `automating-reminders/references/reminders-recipes.md` for practical create/query/batch examples.
+- **Advanced**: For complex scenarios, load `automating-reminders/references/reminders-advanced.md` (priority, limits, debugging).
+- **Dictionary**: Reference `automating-reminders/references/reminders-dictionary.md` for full type mappings.
+- **PyXA API Reference** (complete class/method docs): `automating-reminders/references/reminders-pyxa-api-reference.md`

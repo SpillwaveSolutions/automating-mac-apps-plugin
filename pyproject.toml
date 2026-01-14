@@ -1,0 +1,41 @@
+[tool.poetry]
+name = "automating-mac-apps-tests"
+version = "0.1.0"
+description = "Local test harness for macOS automation skills (outside plugin payload)."
+authors = ["Spillwave Solutions"]
+package-mode = false
+
+[tool.poetry.dependencies]
+# PyXA 0.3.0.x supports Python up to 3.12; cap to avoid 3.13 incompatibilities.
+python = ">=3.10,<3.13"
+# PyXA 0.3.0.x requires PyObjC 9.x; pin accordingly.
+mac-pyxa = "0.3.0"
+pyobjc = "^9.0"
+# Required for PyXA Keynote automation
+appscript = "^1.2.0"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.0.0"
+pytest-mock = "^3.10.0"
+pytest-cov = "^4.0.0"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "-v",
+    "--tb=short",
+    "--strict-markers",
+    "--disable-warnings"
+]
+markers = [
+    "unit: Unit tests with mocking",
+    "integration: Integration tests with real data",
+    "slow: Slow-running tests"
+]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

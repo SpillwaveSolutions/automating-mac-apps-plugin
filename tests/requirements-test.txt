@@ -1,0 +1,10 @@
+# Testing Dependencies for macOS Automation
+pytest>=7.0.0
+pytest-mock>=3.10.0
+pytest-cov>=4.0.0
+
+# Mocking and testing utilities
+unittest-mock>=0.1.0
+
+# Note: PyXA and PyObjC are runtime dependencies but not needed for unit testing
+# as they are mocked in the test suite
