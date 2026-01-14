@@ -14,11 +14,25 @@ Reminders works like a database: everything is accessed via specifiers (referenc
 ## Quickstart (create + alerts)
 First, ensure Reminders permissions are granted (see `automating-mac-apps` for setup).
 
-**JXA (Legacy):**
+**JXA:**
 ```javascript
 try {
   const app = Application("Reminders");
-  const list = app.lists.byName("Inbox");
+
+  // Get list by name, or fall back to first available list
+  let list;
+  try {
+    list = app.lists.byName("Reminders");
+    list.name(); // Verify it exists
+  } catch (e) {
+    // Fall back to first available list
+    const lists = app.lists();
+    if (lists.length === 0) {
+      throw new Error("No reminder lists found");
+    }
+    list = lists[0];
+  }
+
   const r = app.Reminder({
     name: "Prepare deck",
     body: "Client review",
@@ -27,12 +41,14 @@ try {
     priority: 1 // High priority
   });
   list.reminders.push(r);
-  console.log("Reminder created successfully");
+  console.log("Reminder created in '" + list.name() + "'");
 } catch (error) {
   console.error("Failed to create reminder: " + error.message);
-  // Common errors: Permissions denied, Inbox list not found
+  // Common errors: Permissions denied, list not found
 }
 ```
+
+> **Note:** The list name varies by system. Common names include "Reminders", "Inbox", or localized versions. Using `app.lists()[0]` as a fallback ensures the script works across different configurations.
 
 **PyXA (Recommended Modern Approach):**
 ```python
