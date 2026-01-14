@@ -9,9 +9,15 @@ git push -u origin main
 
 ## Installation
 
-### Option 1: Claude Code Marketplace (Recommended)
+### Adding as a Marketplace 
+```
+/plugin marketplace add SpillwaveSolutions/automating-mac-apps-plugin  
 
-If the plugin is available in the Claude Code marketplace:
+```
+
+### After adding marketplace then you can add skill
+
+Once the plugin is available as a Claude Code marketplace:
 
 ```bash
 claude plugins install automating-mac-apps-plugin
