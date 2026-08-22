@@ -1,0 +1,16 @@
+{
+  "name": "automating-mac-apps-marketplace",
+  "version": "1.1.0",
+  "plugins": [
+    {
+      "name": "automating-mac-apps",
+      "source": "./plugins/automating-mac-apps-plugin",
+      "description": "Automate macOS apps via Apple Events using AppleScript (discovery) and JXA (production).",
+      "version": "1.1.0",
+      "compatibility": {
+        "claude_plugin": true,
+        "zero_config": true
+      }
+    }
+  ]
+}

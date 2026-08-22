@@ -1,0 +1,19 @@
+version: 1
+project:
+  key: MAC
+  name: "automating-mac-apps"
+ticketing:
+  system: github
+  project: SpillwaveSolutions/automating-mac-apps-plugin
+wiki:
+  system: github-wiki
+  root_url: https://github.com/SpillwaveSolutions/automating-mac-apps-plugin/wiki
+paths:
+  plans: docs/plans
+  status: docs/status
+  roadmap: docs/roadmap.md
+status:
+  default_kind: daily
+  week_starts: monday
+  publish: true
+installed: 0.24.4

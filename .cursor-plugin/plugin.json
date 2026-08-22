@@ -1,0 +1,10 @@
+{
+  "name": "automating-mac-apps",
+  "version": "1.1.0",
+  "description": "Automate macOS apps via Apple Events using AppleScript (discovery) and JXA (production).",
+  "author": {
+    "name": "Rick Hightower"
+  },
+  "skills": "./plugins/automating-mac-apps-plugin/skills/",
+  "rules": ".cursor/rules/"
+}

@@ -1,0 +1,22 @@
+{
+  "name": "automating-mac-apps",
+  "version": "1.1.0",
+  "description": "Automate macOS apps via Apple Events using AppleScript (discovery) and JXA (production).",
+  "author": {
+    "name": "Rick Hightower"
+  },
+  "homepage": "https://github.com/SpillwaveSolutions/automating-mac-apps-plugin",
+  "repository": "https://github.com/SpillwaveSolutions/automating-mac-apps-plugin",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "grok-build",
+    "codex",
+    "cursor",
+    "agent-plugins",
+    "worklog",
+    "wiki-ticket-sdd"
+  ],
+  "skills": "./skills/",
+  "rules": ".cursor/rules/"
+}

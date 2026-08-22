@@ -1,0 +1,17 @@
+{
+  "name": "automating-mac-apps-marketplace",
+  "description": "Grok marketplace pin. Grok Build also loads Claude plugins zero-config.",
+  "version": "1.1.0",
+  "plugins": [
+    {
+      "name": "automating-mac-apps",
+      "source": ".",
+      "description": "Automate macOS apps via Apple Events using AppleScript (discovery) and JXA (production).",
+      "version": "1.1.0",
+      "compatibility": {
+        "claude_plugin": true,
+        "zero_config": true
+      }
+    }
+  ]
+}
